@@ -1,3 +1,3 @@
 # LiquiCouch Demo
 
-This is an example project of how to use LiquiCouch (https://github.com/deniswsrosa/liquicouch)
+This is a sample project to show how to use LiquiCouch (https://github.com/deniswsrosa/liquicouch)
