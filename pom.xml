@@ -57,9 +57,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.github.liquicouch</groupId>
+			<groupId>com.github.deniswsrosa</groupId>
 			<artifactId>liquicouch</artifactId>
-			<version>0.1-SNAPSHOT</version>
+			<version>0.6.4</version>
 		</dependency>
         <dependency>
             <groupId>com.couchbase.client</groupId>
