@@ -24,6 +24,7 @@ public class User extends BasicEntity {
     @Field
     private String name;
 
+
     @Field
     private Address address;
 
