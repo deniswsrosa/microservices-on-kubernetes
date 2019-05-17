@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(String userId) {
-        return userRepository.findOne(userId);
+        return userRepository.findById(userId).get();
     }
 
     @Override
@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
             Iterator<SearchQueryRow> resultIterator = result.iterator();
             while (resultIterator.hasNext()) {
                 SearchQueryRow row = resultIterator.next();
-                buildings.add(userRepository.findOne(row.id()));
+                buildings.add(userRepository.findById(row.id()).get());
             }
         }
         return buildings;
@@ -113,9 +113,10 @@ public class UserServiceImpl implements UserService {
 
         List<User> users = new ArrayList<>();
         for(int i =0; i < 100; i ++) {
-            users.add( new User("user::"+i, "user"+i, address1, new ArrayList<>(), new ArrayList<>()));
+            users.add( new User("user::"+i, "user"+i, "user"+i, address1, new ArrayList<>(), new ArrayList<>()));
         }
-        userRepository.save(users);
+
+        users.forEach(e-> userRepository.save(e));
         return users;
     }
 }

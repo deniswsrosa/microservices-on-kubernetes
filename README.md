@@ -16,21 +16,16 @@ All yaml files are inside the "kubernetes" folder
 ## Deploying the database ###########
 
 1.  Run the command:
-`kubectl create -f 2-serviceaccount-couchbase-operator.yaml`
+* `kubectl create -f admission.yaml`
+* `kubectl create -f crd.yaml`
+* `kubectl create -f operator-role.yaml`
+* `kubectl create -f operator-service-account.yaml`
+* `kubectl create -f operator-role-binding.yaml`
+* `kubectl create -f operator-deployment.yaml`
+* `kubectl create -f secret.yaml`
+* `kubectl create -f couchbase-cluster.yaml`
 
-2.  Run the command:
-`kubectl create -f 3-cluster-role.yaml`
-
-3.  Deploy the operator by running:
-`kubectl create -f 4-operator.yaml`
-
-2.  Specify couchbase's password in the "secret.yaml" file and the run:
-`kubectl create -f 5-secret.yaml`
-
-4. Deploy a couchbase cluster by running
-`kubectl create -f 6-couchbase-cluster.yaml`
-
-5. Create a user called **couchbase-sample**:
+2. Create a user called **couchbase-sample**:
 	1. Access the Couchbase's Web Console by executing the following command:
 	 `kubectl port-forward cb-example-0000 8091:8091`
 	2. Go to http://localhost:80091 and login using 'Administrator' and 'password'

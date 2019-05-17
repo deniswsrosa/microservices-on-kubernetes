@@ -16,10 +16,10 @@ spec:
     eventingServiceMemoryQuota: 256
     analyticsServiceMemoryQuota: 1024
     indexStorageSetting: memory_optimized
-    autoFailoverTimeout: 40
+    autoFailoverTimeout: 15
     autoFailoverMaxCount: 2
     autoFailoverOnDataDiskIssues: true
-    autoFailoverOnDataDiskIssuesTimePeriod: 40
+    autoFailoverOnDataDiskIssuesTimePeriod: 15
     autoFailoverServerGroup: false
   buckets:
     - name: couchbase-sample
@@ -32,7 +32,7 @@ spec:
       enableFlush: true
       enableIndexReplica: false
   servers:
-    - size: 3
+    - size: 8
       name: basic_services
       services:
         - data

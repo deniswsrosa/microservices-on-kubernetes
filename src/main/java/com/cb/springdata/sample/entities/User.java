@@ -24,6 +24,10 @@ public class User extends BasicEntity {
     @Field
     private String name;
 
+    @NotNull
+    @Field
+    private String username;
+
 
     @Field
     private Address address;
