@@ -16,9 +16,9 @@ public interface UserRepository extends CouchbasePagingAndSortingRepository<User
 
     List<User> findByName(String name);
 
-    @Query("#{#n1ql.selectEntity} where #{#n1ql.filter} and ANY preference IN " +
+    @Query("#{#n1ql.selectEntity} where #{#n1ql.filter} and  ANY preference IN " +
             " preferences SATISFIES preference.name = $1 END")
-    List<User> findUsersByPreferenceName(String name);
+    List<User> findUsersByPreferenceName(String namxe);
 
     @Query("#{#n1ql.selectEntity} where #{#n1ql.filter} and meta().id = $1 and ARRAY_CONTAINS(securityRoles, $2)")
     User hasRole(String userId, String role);

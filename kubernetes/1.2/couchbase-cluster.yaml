@@ -16,16 +16,16 @@ spec:
     eventingServiceMemoryQuota: 256
     analyticsServiceMemoryQuota: 1024
     indexStorageSetting: memory_optimized
-    autoFailoverTimeout: 120
+    autoFailoverTimeout: 30
     autoFailoverMaxCount: 3
     autoFailoverOnDataDiskIssues: true
-    autoFailoverOnDataDiskIssuesTimePeriod: 120
+    autoFailoverOnDataDiskIssuesTimePeriod: 30
     autoFailoverServerGroup: false
   buckets:
     - name: couchbase-sample
       type: couchbase
       memoryQuota: 128
-      replicas: 1
+      replicas: 3
       ioPriority: high
       evictionPolicy: fullEviction
       conflictResolution: seqno
@@ -39,5 +39,3 @@ spec:
         - index
         - query
         - search
-        - eventing
-        - analytics

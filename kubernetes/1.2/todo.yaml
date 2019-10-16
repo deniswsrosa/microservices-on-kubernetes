@@ -1,0 +1,7 @@
+apiVersion: todoexample.com/v1
+kind: Todo
+metadata:
+  name: devops-space
+spec:
+  when: "2019-10-16T15:00:00Z"
+  message: "Speak at DevOps Space"
