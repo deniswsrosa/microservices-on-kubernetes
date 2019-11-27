@@ -28,7 +28,7 @@ All yaml files are inside the "kubernetes" folder
 2. Create a user called **couchbase-sample**:
 	1. Access the Couchbase's Web Console by executing the following command:
 	 `kubectl port-forward cb-example-0000 8091:8091`
-	2. Go to http://localhost:80091 and login using 'Administrator' and 'password'
+	2. Go to http://localhost:8091 and login using 'Administrator' and 'password'
 	3. Go to Security and add a new user called 'couchbase-sample' with password 'couchbase-sample'
 
 
