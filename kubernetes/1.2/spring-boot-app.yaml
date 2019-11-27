@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: deniswsrosa/couchbase-java-sample
+        image: deniswsrosa/couchbase-java-sample-admin
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -29,6 +29,7 @@ spec:
               key: bucket_password
         - name: COUCHBASE_BUCKET
           value: couchbase-sample
-
+        - name: COUCHBASE_USERNAME
+          value: Administrator
         - name: COUCHBASE_HOST
           value: cb-example

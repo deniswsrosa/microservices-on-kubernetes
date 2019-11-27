@@ -1,7 +1,7 @@
 apiVersion: todoexample.com/v1
 kind: Todo
 metadata:
-  name: devops-space
+  name: devfest-romania
 spec:
-  when: "2019-10-16T15:00:00Z"
-  message: "Speak at DevOps Space"
+  when: "2019-11-15T14:00:00Z"
+  message: "Speak at DevFest Romania"
