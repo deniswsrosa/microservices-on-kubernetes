@@ -17,7 +17,7 @@ spec:
         image: deniswsrosa/couchbase-java-sample-admin
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080
+        - containerPort: 80
           name: server
         - containerPort: 8081
           name: management
