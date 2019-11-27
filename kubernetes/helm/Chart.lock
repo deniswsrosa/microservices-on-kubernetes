@@ -1,0 +1,9 @@
+dependencies:
+- name: couchbase-operator
+  repository: https://couchbase-partners.github.io/helm-charts/
+  version: 0.1.2
+- name: couchbase-cluster
+  repository: https://couchbase-partners.github.io/helm-charts/
+  version: 0.1.2
+digest: sha256:a9de65edadee9f32b8d6b74ce0e345d0df892edfb8ae6e2cc3df52181bee2c25
+generated: "2019-11-27T14:53:33.426212Z"

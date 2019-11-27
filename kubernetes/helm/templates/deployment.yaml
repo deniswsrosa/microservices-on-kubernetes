@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "microservice.fullname" . }}
+  labels:
+    {{- include "microservice.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "microservice.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "microservice.selectorLabels" . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "microservice.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: check-for-bucket
+          image: busybox:1.28
+          command: ['sh', '-c', 'until `wget -q -O /dev/null http://{{ .Values.COUCHBASE_USERNAME }}:{{ .Values.COUCHBASE_PASSWORD }}@{{ .Release.Name }}-couchbase-cluster:{{ .Values.COUCHBASE_PORT }}/pools/default/buckets/{{ .Values.COUCHBASE_BUCKET }}`; do echo "`date`: Polling: http://{{ .Values.COUCHBASE_USERNAME }}:{{ .Values.COUCHBASE_PASSWORD }}@{{ .Release.Name }}-couchbase-cluster:{{ .Values.COUCHBASE_PORT }}/pools/default/buckets/{{ .Values.COUCHBASE_BUCKET }}"; sleep 2; done;']
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: "COUCHBASE_BUCKET"
+              value: {{ .Values.COUCHBASE_BUCKET }}
+            - name: "COUCHBASE_HOST"
+              value: {{ .Release.Name }}-couchbase-cluster
+            - name: "COUCHBASE_USERNAME"
+              value: "Administrator" # {{ .Values.COUCHBASE_USERNAME }}
+            - name: "COUCHBASE_PASSWORD"
+              value: "password" # {{ .Values.COUCHBASE_PASSWORD }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
